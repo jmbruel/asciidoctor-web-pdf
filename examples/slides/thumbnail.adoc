@@ -1,0 +1,17 @@
+= JUnit & Threads
+Jean-Michel Bruel <jmbruel.netlify.com> -- {localdate}
+:icons: font
+:template: template.js
+
+image::UT2JJ.png[width=50%]
+
+== !
+
+[.columns-2]
+--
+[.column]
+image::UT2JJ.png[width=10%]
+
+[.column]
+image::sm@rt-logo.png[width=10%]
+--

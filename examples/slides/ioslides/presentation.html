@@ -2,28 +2,423 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link href="/home/guillaume/workspace/opensource/asciidoctor/asciidoctor-pdf.js/examples/slides/asciidoctor.css" rel="stylesheet">
-<link rel="stylesheet" href="/home/guillaume/workspace/opensource/asciidoctor/asciidoctor-pdf.js/examples/slides/ioslides/styles/main.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-<script>
-hljs.initHighlightingOnLoad();
-</script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.11">
+<meta name="author" content="Author Name">
+<title>Asciidoctor PDF: Beautiful documents using web technologies</title>
+<style>
+@import 'https://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans&display=swap';
+
+@page {
+  size: 1024px 768px;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  color: #797979;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+p, blockquote, dt, td.content, span.alt {
+  font-size: 1.4rem;
+}
+
+html {
+  font-size: 16pt;
+}
+
+.slide {
+  position: relative;
+  width: 1024px;
+  height: 768px;
+
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+  padding: 2.5rem 3.75rem;
+
+  background: linear-gradient(to bottom, #fff 90%, #e6e6e6);
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+h1 {
+  font-size: 4.0625rem;
+  letter-spacing: -.1875rem;
+  line-height: 1.4;
+  color: #515151;
+}
+
+h1, h2 {
+  margin-top: 0;
+  font-family: "Open Sans", "DejaVu Sans", sans-serif;
+  font-weight: 600;
+  color: #515151;
+}
+
+.slide.title h2 {
+  color: #a9a9a9;
+  font-size: 2.125rem;
+  font-weight: normal;
+}
+
+h2 {
+  letter-spacing: -.125rem;
+  line-height: 1;
+}
+
+h3 {
+  font-size: 1.875rem;
+  font-weight: inherit;
+  letter-spacing: -.0625rem;
+  line-height: 2;
+  color: #797979;
+}
+
+:not(header) > h2, header {
+  margin-bottom: 2.5rem;
+}
+
+table {
+  font-size: 1.25rem;
+}
+
+ul {
+  margin: 0 0 1em 1.2em;
+  position: relative;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+ul li {
+  margin-bottom: .15em;
+}
+
+ul > li p {
+  margin-bottom: 0.1rem;
+}
+
+.ulist .ulist {
+  margin-bottom: 0.15rem;
+}
+
+ul li::before {
+  content: "\00b7";
+  margin-left: -1em;
+  position: absolute;
+  font-weight: 600;
+}
+
+ul ul {
+  margin: .1em 0 0 1em;
+}
+
+ul li ul li::before {
+  content: "\002d";
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+.slide.title > footer {
+  position: absolute;
+  bottom: 3rem;
+  font-size: 1.25rem;
+  margin-top: 2em;
+}
+
+.slide.title header {
+  position: absolute;
+  bottom: 11.25rem;
+  margin-bottom: 0;
+}
+
+.slide.title::before {
+  content: "";
+  background-image: url(../images/google-developers-icon.svg), linear-gradient(to left, #e6e6e6, #e6e6e6);
+  background-size: 3rem 3rem, 100% 100%;
+  background-position: right 1rem center, left top;
+  background-repeat: no-repeat;
+  padding-right: 1rem;
+  position: absolute;
+  top: 9rem;
+  left: 0;
+  width: 8rem;
+  height: 4rem;
+  border-radius: 0 0.7rem 0.7rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.no-title > h2 {
+  display: none;
+}
+
+.slide::after {
+  content: attr(data-slide-number) "/" attr(data-slide-count);
+  counter-increment: slide;
+  font-size: .75rem;
+  position: absolute;
+  bottom: 1.25rem;
+  right: 3.75rem;
+  line-height: 1.9;
+}
+
+.slide.title::after {
+  content: ''
+}
+
+.compact pre {
+  font-size: .9375rem;
+  line-height: 1.3333;
+  letter-spacing: 0
+}
+
+.compact .literalblock pre, .compact .literalblock pre[class], .compact .listingblock pre, .compact .listingblock pre[class] {
+  font-size: .6rem;
+}
+
+.audioblock, .imageblock, .literalblock, .listingblock, .stemblock, .videoblock {
+  margin-bottom: 1rem;
+}
+
+.compact pre > code[data-lang]::after {
+  font-size: .75rem;
+}
+
+.compact p:not(.tableblock), .compact ul {
+  font-size: 1.1rem;
+  line-height: 1.2;
+  letter-spacing: 0
+}
+
+.compact table td, .compact table th {
+  font-size: .875rem
+}
+
+code:not([data-lang]) {
+  font-size: .95em;
+  color: #000
+}
+
+pre, pre > code {
+  font-family: "Source Code Pro", monospace;
+  color: #000;
+  background-color: #e6e6e6;
+  margin: 0 0 1.25rem -3.75rem;
+  position: relative;
+}
+
+.literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] {
+  font-size: .8em;
+  padding: 0;
+}
+
+pre > code[data-lang] {
+  display: block;
+  background: inherit;
+  padding: .625rem 4.75rem .625rem 5.75rem;
+}
+
+pre > code[data-lang]::after {
+  content: attr(data-lang);
+  background-color: #a9a9a9;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.25rem;
+  color: #fff;
+  padding: .125rem 1.5625rem;
+  text-transform: uppercase
+}
+
+b.button {
+  display: inline-block;
+  color: #000;
+  background: linear-gradient(#f9f9f9 40%, #e3e3e3 70%);
+  font-weight: inherit;
+  border: 1px solid #a9a9a9;
+  border-radius: 3px;
+  white-space: nowrap;
+  text-shadow: 1px 1px #fff;
+  font-size: .5em;
+  vertical-align: middle;
+  padding: .3125rem .5rem .35rem;
+}
+
+b.button:before, b.button:after {
+  display: none;
+}
+
+.disabled b.button {
+  color: #a9a9a9;
+}
+
+.columns-2 {
+  display: flex;
+}
+
+.columns-2 > * {
+  flex: 0 0 50%;
+}
+
+.slide.image h2, p.credit.light, small.credit.light {
+  color: #fff;
+}
+
+p.credit, small.credit {
+  font-size: .875rem;
+  color: #a9a9a9;
+  position: absolute;
+  bottom: 4.375rem;
+  left: 3.75rem;
+  margin: 0;
+}
+
+.slide.inverse {
+  color: #e6e6e6;
+  background: #515151;
+}
+
+.quoteblock {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quoteblock blockquote:before {
+  content: open-quote;
+  position: absolute;
+  margin-left: -.5em;
+  color: inherit;
+}
+
+.quoteblock blockquote {
+  margin: 0;
+  font-size: 2.5rem;
+  line-height: 1.6;
+}
+
+.quoteblock blockquote, .quoteblock blockquote p {
+  color: inherit;
+}
+
+.quoteblock .attribution cite, .verseblock .attribution cite {
+  color: inherit;
+}
+
+.slide.closing {
+  background: #4387fd;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.closing h2 {
+  color: inherit;
+  margin-bottom: 3.3333rem;
+}
+
+.slide.segue h2 {
+  font-size: 3.75rem;
+  line-height: .75;
+}
+
+.slide.closing .contact td.hdlist1 {
+  width: 7.1875rem;
+}
+
+.slide.closing .contact td, ol, ul {
+  padding: 0;
+}
+
+.slide.closing .contact p, .slide.closing .contact td {
+  font-size: inherit;
+}
+
+.slide.closing .contact p, .slide.closing .contact td {
+  font-size: inherit;
+}
+
+.slide.closing table tr th, .slide.closing table tr td {
+  color: inherit;
+}
+
+.slide.segue::before, .slide.title::before {
+  content: "";
+  background-image: url(../images/google-developers-icon.svg), linear-gradient(to left, #e6e6e6, #e6e6e6);
+  background-size: 3rem 3rem, 100% 100%;
+  background-position: right 15px center, left top;
+  background-repeat: no-repeat;
+  padding-right: 1rem;
+  position: absolute;
+  top: 7.8125rem;
+  left: 0;
+  width: 8rem;
+  height: 4rem;
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  transition: background-size 500ms ease-out 500ms;
+}
+
+.slide.badge-right::before {
+  top: 5.475rem;
+  right: 0;
+  left: initial;
+  border-radius: 10px 0 0 10px;
+  background-position: 15px center, right top;
+}
+
+.slide.badge-bottom::before {
+  top: initial;
+  bottom: 3.75rem;
+}
+
+figure.image {
+  max-width: 100%;
+}
+
+figure.image.crux {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+figure.image.crux {
+  align-items: center;
+}
+
+</style>
 </head>
-<body>
-<section class="title slide">
-  <header>
-    <h1>Asciidoctor PDF</h1>
-<h2>Beautiful documents using web technologies</h2>
-  </header>
-  <footer>
-    <p class="author">Author Name</p>
-  </footer>
-</section>
-<section class="slide " data-slide-number="1" data-slide-count="14" >
-  <h2>Slide with Bullets</h2>
-  <div class="ulist">
+<body class="article">
+<div id="header">
+<h1>Asciidoctor PDF: Beautiful documents using web technologies</h1>
+<div class="details">
+<span id="author" class="author">Author Name</span><br>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2>Slide with Bullets</h2>
+<div class="sectionbody">
+<div class="ulist">
 <ul>
 <li>
 <p>Titles are formatted as Open Sans with bold applied</p>
@@ -46,10 +441,12 @@ hljs.initHighlightingOnLoad();
 </li>
 </ul>
 </div>
-</section>
-<section class="slide compact " data-slide-number="2" data-slide-count="14" >
-  <h2>Slide with Smaller Font</h2>
-  <div class="ulist">
+</div>
+</div>
+<div class="sect1 compact">
+<h2>Slide with Smaller Font</h2>
+<div class="sectionbody">
+<div class="ulist">
 <ul>
 <li>
 <p>All <a href="http://google.com">links</a> open in new tabs.</p>
@@ -59,13 +456,12 @@ hljs.initHighlightingOnLoad();
 </li>
 </ul>
 </div>
-</section>
-<section class="slide " data-slide-number="3" data-slide-count="14" >
-  <header>
-  <h2>Code Slide (with Subtitle Placeholder)</h2>
-  <h3> Subtitle Placeholder</h3>
-</header>
-  <div class="listingblock">
+</div>
+</div>
+<div class="sect1">
+<h2>Code Slide (with Subtitle Placeholder): Subtitle Placeholder</h2>
+<div class="sectionbody">
+<div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-js" data-lang="js">// Say hello world until the user starts questioning
 // the meaningfulness of their existence.
@@ -76,10 +472,12 @@ function helloWorld(world) {
 }</code></pre>
 </div>
 </div>
-</section>
-<section class="slide compact " data-slide-number="4" data-slide-count="14" >
-  <h2>Code Slide (Smaller Font)</h2>
-  <div class="listingblock">
+</div>
+</div>
+<div class="sect1 compact">
+<h2>Code Slide (Smaller Font)</h2>
+<div class="sectionbody">
+<div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-js" data-lang="js">// Say hello world until the user starts questioning
 // the meaningfulness of their existence.
@@ -111,21 +509,32 @@ function helloWorld(world) {
 &lt;/html&gt;</code></pre>
 </div>
 </div>
-</section>
-<section class="slide " data-slide-number="5" data-slide-count="14" >
-  <h2>Slide with Image</h2>
-  <figure class="image reflect"><img src="images/piechart.png" height="419" width="654"/></figure>
-</section>
-<section class="slide " data-slide-number="6" data-slide-count="14" >
-  <h2>Slide with Image (Centered horz/vert)</h2>
-  <figure class="image crux"><img src="images/barchart.png" height="299" width="697"/></figure>
-</section>
-<section class="slide " data-slide-number="7" data-slide-count="14" >
-  <header>
-  <h2>Table Option A</h2>
-  <h3> Subtitle Placeholder</h3>
-</header>
-  <table class="tableblock frame-all grid-all fit-content spread">
+</div>
+</div>
+<div class="sect1">
+<h2>Slide with Image</h2>
+<div class="sectionbody">
+<div class="imageblock reflect">
+<div class="content">
+<img src="images/piechart.png" alt="Pie chart description" width="654" height="419">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2>Slide with Image (Centered horz/vert)</h2>
+<div class="sectionbody">
+<div class="imageblock crux">
+<div class="content">
+<img src="images/barchart.png" alt="Bar chart description" width="697" height="299">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2>Table Option A: Subtitle Placeholder</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all fit-content spread">
 <colgroup>
 <col>
 <col>
@@ -180,13 +589,12 @@ function helloWorld(world) {
 </tr>
 </tbody>
 </table>
-</section>
-<section class="slide compact " data-slide-number="8" data-slide-count="14" >
-  <header>
-  <h2>Table Option A (Smaller Text)</h2>
-  <h3> Subtitle Placeholder</h3>
-</header>
-  <table class="tableblock frame-all grid-all fit-content spread">
+</div>
+</div>
+<div class="sect1 compact">
+<h2>Table Option A (Smaller Text): Subtitle Placeholder</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all fit-content spread">
 <colgroup>
 <col>
 <col>
@@ -241,13 +649,12 @@ function helloWorld(world) {
 </tr>
 </tbody>
 </table>
-</section>
-<section class="slide " data-slide-number="9" data-slide-count="14" >
-  <header>
-  <h2>Table Option B</h2>
-  <h3> Subtitle Placeholder</h3>
-</header>
-  <table class="tableblock frame-all grid-all fit-content pivot spread">
+</div>
+</div>
+<div class="sect1">
+<h2>Table Option B: Subtitle Placeholder</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all fit-content pivot spread">
 <colgroup>
 <col>
 <col>
@@ -287,10 +694,14 @@ function helloWorld(world) {
 </tr>
 </tbody>
 </table>
-</section>
-<section class="slide " data-slide-number="10" data-slide-count="14" >
-  <h2>Slide Styles</h2>
-  <div class="columns-2 compact float-group"><div class="ulist left">
+</div>
+</div>
+<div class="sect1">
+<h2>Slide Styles</h2>
+<div class="sectionbody">
+<div class="openblock columns-2 compact float-group">
+<div class="content">
+<div class="ulist left">
 <ul>
 <li>
 <p>class="red"</p>
@@ -345,17 +756,33 @@ function helloWorld(world) {
 <p>class="gray4"</p>
 </li>
 </ul>
-</div></div>
-<div class="text-center">I am centered text with a <b class="button">Button</b> and <span class="disabled"><b class="button">Disabled</b></span> button.</div>
-</section>
-<section class="slide image " data-slide-number="11" data-slide-count="14" style="background-image: url(images/mountains.jpg); background-size: cover; background-repeat: no-repeat">
-  <h2>Full Image (with Optional Header)</h2>
-  
-<p class="credit light">unsplash.com/photos/PKVcQXEcfLU</p>
-</section>
-<section class="slide inverse segue badge-right badge-bottom no-title" data-slide-number="12" data-slide-count="14" >
-  <h2>!</h2>
-  <div class="quoteblock tada">
+</div>
+</div>
+</div>
+<div class="openblock text-center">
+<div class="content">
+I am centered text with a <b class="button">Button</b> and <span class="disabled"><b class="button">Disabled</b></span> button.
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2>Full Image (with Optional Header)</h2>
+<div class="sectionbody">
+<div class="imageblock cover canvas">
+<div class="content">
+<img src="images/mountains.jpg" alt="Mountains" width="1100" height="700">
+</div>
+</div>
+<div class="paragraph credit light">
+<p>unsplash.com/photos/PKVcQXEcfLU</p>
+</div>
+</div>
+</div>
+<div class="sect1 inverse segue badge-right badge-bottom">
+<h2>!</h2>
+<div class="sectionbody">
+<div class="quoteblock tada">
 <blockquote>
 This is an example of a quote.
 </blockquote>
@@ -364,10 +791,14 @@ This is an example of a quote.
 <cite>Company</cite>
 </div>
 </div>
-</section>
-<section class="slide closing segue badge-right " data-slide-number="13" data-slide-count="14" >
-  <h2>&lt;Thank You!&gt;</h2>
-  <p class="">Important contact information goes here.</p>
+</div>
+</div>
+<div class="sect1 closing segue badge-right">
+<h2>&lt;Thank You!&gt;</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Important contact information goes here.</p>
+</div>
 <div class="hdlist contact">
 <table>
 <tr>
@@ -404,9 +835,23 @@ github
 </tr>
 </table>
 </div>
-</section>
-<section class="slide inverse subject no-title" data-slide-number="14" data-slide-count="14" >
-  <h2>!</h2>
-  <figure class="image logo crux"><img src="images/google-developers-logo-inverse.svg" height="96" width="422"/></figure>
-</section>
+</div>
+</div>
+<div class="sect1 inverse subject">
+<h2>!</h2>
+<div class="sectionbody">
+<div class="imageblock logo crux">
+<div class="content">
+<img src="images/google-developers-logo-inverse.svg" alt="Google Developers" width="422" height="96">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2020-11-07 14:59:30 +0100
+</div>
+</div>
 </body>
+</html>

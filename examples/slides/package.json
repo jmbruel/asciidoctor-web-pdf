@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "dependencies": {
+    "asciidoctor-plantuml": "^1.1.13"
+  },
+  "scripts": {
+    "adoc": "asciidoctor-web-pdf --template-require ./template.js"
+  },
+  "name": "test"
+}

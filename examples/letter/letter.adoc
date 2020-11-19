@@ -1,4 +1,5 @@
 image::./asciidoctor.svg[role=logo]
+:stylesheet: letter.css
 
 [.recipient]
 Dr. Chrome Headless +
